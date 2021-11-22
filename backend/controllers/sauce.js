@@ -70,4 +70,52 @@ exports.getAllSauces = (req, res, next) => {
 };
 
 
-//IMPLEMENTER LE CONTROLLER SAUCE LIKE - likeSauce
+//****** LIKER / DISLIKER UNE SAUCE ******
+exports.likeDislikeSauce = (req, res, next) => {
+    Sauce.findOne({_id: req.params.id}) // On cherche la sauce dont l'id correcpond à l'id de la requête
+    .then(sauce => {
+      switch(req.body.like) {
+        case 1: // si un utilisateur like une sauce
+          Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: +1 }, $push: { usersLiked: req.body.userId } }) // màj sauce: on incrémente de 1 le nombre de likes et on ajoute l'userId au tableau usersLiked
+            .then((sauce) => res.status(200).json({ message: '+1 !' }))
+            .catch(error => res.status(400).json({ error }))
+        break;
+
+        case 0: //si un utilisateur annule son like ou son dislike
+          if (sauce.usersLiked.includes(req.body.userId)) { //si l'userId se trouve déjà dans le tableau usersLiked,
+            Sauce.updateOne({ _id: req.params.id }, { $inc: { likes: -1 }, $pull: { usersLiked: req.body.userId } }) //màj sauce : on décrémente de 1 les likes et on ôte l'userId du tableau
+              .then((sauce) => { res.status(200).json({ message: 'Plus de vote !' }) })
+              .catch(error => res.status(400).json({ error }))
+          } else if (sauce.usersDisliked.includes(req.body.userId)) { //si l'userId se trouve déjà dans le tableau usersDisliked,
+            Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: -1 }, $pull: { usersDisliked: req.body.userId } }) //màj sauce : on décrémente de 1 les dislikes et on ôte l'userId du tableau
+              .then((sauce) => { res.status(200).json({ message: 'Plus de vote !' }) })
+              .catch(error => res.status(400).json({ error }))
+          }
+        break;
+
+        case -1: //si un utilisateur dislike une sauce
+          Sauce.updateOne({ _id: req.params.id }, { $inc: { dislikes: +1}, $push: { usersDisliked: req.body.userId } }) // màj sauce: on incrémente de 1 le nombre de dislikes et on ajoute l'userId au tableau usersDisliked
+            .then((sauce) => res.status(200).json({ message: '-1 !' }))
+            .catch(error => res.status(400).json({ error }))
+        break;
+      }
+    })
+    .catch(error => res.status(404).json({error})); //erreur 404 : objet non trouvé
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

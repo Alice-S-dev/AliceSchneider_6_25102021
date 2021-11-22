@@ -13,8 +13,7 @@ router.put('/:id', auth, multer, sauceCtrl.modifySauce);//modifier une sauce exi
 router.delete('/:id', auth, sauceCtrl.deleteSauce);//supprimer une sauce
 router.get('/:id', auth, sauceCtrl.getOneSauce);//retrouver une sauce dans la BDD, par son identifiant
 router.get('/', auth, sauceCtrl.getAllSauces);//envoyer un tableau de toutes les sauces de la BDD 
-
-//IMPLEMENTER LA ROUTE SAUCE LIKE "post"  "/:id/like" 
+router.post('/:id/like', auth, sauceCtrl.likeDislikeSauce); //aimer ou ne pas aimer une sauce
 
 
 module.exports = router; //on exporte le routeur (pour l'importer sur app.js)
