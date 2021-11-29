@@ -5,7 +5,7 @@ const router = express.Router(); //on crée un routeur avec express
 
 sauceCtrl = require('../controllers/sauce'); //on implémente les contrôleurs sauce
 const auth = require('../middleware/auth'); // on importe notre middleware d'authentification
-const multer = require('../middleware/multer-config'); //on importe notre middleware de configuration de multer, pour gérer les fichiers utilisateurs
+const multer = require('../middleware/multer-config'); //on importe notre middleware de configuration de multer, pour gérer les fichiers envoyés par les utilisateurs
 
 
 router.post('/', auth, multer, sauceCtrl.createSauce); //enregistrer une nouvelle sauce - multer est ajouté après auth, pour que l'authentification reste nécessaire pour ajouter une image
