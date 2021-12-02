@@ -7,9 +7,10 @@ sauceCtrl = require('../controllers/sauce'); //on implémente les contrôleurs s
 const auth = require('../middleware/auth'); // on importe notre middleware d'authentification
 const multer = require('../middleware/multer-config'); //on importe notre middleware de configuration de multer, pour gérer les fichiers envoyés par les utilisateurs
 
+const inputVerification = require('../middleware/input-verif');
 
-router.post('/', auth, multer, sauceCtrl.createSauce); //enregistrer une nouvelle sauce - multer est ajouté après auth, pour que l'authentification reste nécessaire pour ajouter une image
-router.put('/:id', auth, multer, sauceCtrl.modifySauce);//modifier une sauce existante
+router.post('/', auth, multer, inputVerification, sauceCtrl.createSauce); //enregistrer une nouvelle sauce - multer est ajouté après auth, pour que l'authentification reste nécessaire pour ajouter une image
+router.put('/:id', auth, multer, inputVerification, sauceCtrl.modifySauce);//modifier une sauce existante
 router.delete('/:id', auth, sauceCtrl.deleteSauce);//supprimer une sauce
 router.get('/:id', auth, sauceCtrl.getOneSauce);//retrouver une sauce dans la BDD, par son identifiant
 router.get('/', auth, sauceCtrl.getAllSauces);//envoyer un tableau de toutes les sauces de la BDD 
