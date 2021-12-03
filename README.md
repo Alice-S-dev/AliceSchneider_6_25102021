@@ -4,13 +4,13 @@
 Projet n°6 - Formation Développeur web (Openclassrooms).
  L'objectif de ce projet étant de réaliser le back-end de cette application, le front-end a été fourni par Openclassrooms. 
 
-### Prérequis & infos complémentaires
-***
+## Prérequis & infos complémentaires
+
 Ce projet nécessite l'installation de [NodeJS](https://nodejs.org/en/).
 Il est développé en Javascript (serveur NodeJS, framework Express) et utilise une base de données NoSQL : MongoDB Atlas. 
 
-### Installation
- ***
+## Installation
+
 1. Cloner ce repository : pour plus de simplicité, il contient le frontend et le backend.
 
 2. Lancer le frontend (http://localhost:8081)
@@ -19,7 +19,8 @@ Il est développé en Javascript (serveur NodeJS, framework Express) et utilise 
 3. Lancer le backend (http://localhost:3000)
     - Positionné sur le dossier backend, lancer les commandes : ```npm install``` puis ```nodemon server```
 
-#### Sécurité
+## Sécurité
+
 L'aspect sécurité étant important pour ce projet, voici les mesures de sécurité mises en place : 
 - **bcrypt** : permet de hasher les mots de passe des utilisateurs
 - **jsonwebtoken** : permet de générer un token afin d'authentifier chaque requête utilisateur
