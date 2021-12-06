@@ -1,5 +1,5 @@
 
-const regexInput = /^[a-zA-Z0-9]+[a-zA-Z0-9.\-\ \,\!\?\'\/]+$/ //On définit le format de l'input attendu avec les expressions régulières 
+const regexInput = /^[a-zA-ZÀ-ú0-9]+[a-zA-ZÀ-ú0-9.\-\ \,\!\?\'\/]+$/ //On définit le format de l'input attendu avec les expressions régulières 
 //ici on accepte les lettres min ou maj, les chiffres, les ., - et espaces
 
 module.exports = (req, res, next) => {
