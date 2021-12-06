@@ -41,13 +41,14 @@ exports.modifySauce = (req, res, next) => {
   };
 };
 
+
 //****** SUPPRIMER UNE SAUCE ****** 
 exports.deleteSauce = (req, res, next) => {
   Sauce.findOne({_id: req.params.id}) //avant de supprimer l'objet, on le cherche pour récupérer l'URL de l'image afin d'en extraire le nom du fichier et pouvoir le supprimer
   .then(sauce => {
     const filename = sauce.imageUrl.split('/images/')[1];//on récupère le nom de fichier
     fs.unlink(`images/${filename}`,() => { 
-      Sauce.deleteOne({id: req.params.id}) // ne prend qu'un seul argument car on supprime la sauce, on ne remplace pas
+      Sauce.deleteOne({_id: req.params.id}) // ne prend qu'un seul argument car on supprime la sauce, on ne remplace pas
         .then(() => res.status(200).json({message: 'Sauce supprimée!'}))
         .catch(error => res.status(400).json({error})); 
     });
